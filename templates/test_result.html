@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta http-equiv="refresh" content="30"> 
+</head>
+<body>
+<h4> {{ctime}} </h4>
+<h5> round {{tround}} </h5>
+<table border="1" width="100%">
+
+{% for name,address in tags.items() %}
+{% if name % 10 == 1 %}
+<tr>
+{% end %}
+<td {{address}}>{{name}}</td>
+{% if name % 10 == 0 %}
+</tr>
+{% end %}
+{% end %}
+</table>
+</body>
+</html>

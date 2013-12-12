@@ -10,7 +10,10 @@ import GLOBAL
 import init_by_ping
 import webbrowser
 import run_test
-import urllib
+#import urllib
+#import threading
+#import sys
+
 
 from tornado.options import define, options
 
@@ -31,7 +34,8 @@ class InitHandler(tornado.web.RequestHandler):
         test_prepare()
         init_by_ping.run()
         get_tag_value()
-        self.render("test_result.html", ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround='initialization', 
+        self.render("test_result.html", flag = '<br/>', 
+                    ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround='initialization', 
                     tags = value
                     )
 
@@ -68,20 +72,29 @@ class StopHandler(tornado.web.RequestHandler):
         global flag_run_test
         flag_run_test = False
         self.render("stop.html")
+        #exit()
         #stop loop
+        
         
 class StartHandler(tornado.web.RequestHandler):
     def get(self):
         global flag_run_test, value
-        flag_run_test = True
+        if GLOBAL.round == 1:
+            flag_run_test = True
+        if flag_run_test:
+            web_refresh = '<head><meta http-equiv="refresh" content="' + str(GLOBAL.interval) + '"></head>'
+        else:
+            web_refresh = '<br/>'
+        print flag_run_test
         value = {}
         os.makedirs("log/round%d" %GLOBAL.round)
         run_test.run()
         get_tag_value()
-        self.render("test_result.html", ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround=GLOBAL.round, 
+        self.render("test_result.html", flag = web_refresh, 
+                    ctime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround=GLOBAL.round, 
                     tags = value
-                    )    
-        urllib.urlretrieve('http://localhost:8888/run?', 'log/round%d/result.html' %GLOBAL.round)    
+                    )  
+        #urllib.urlretrieve('http://localhost:8888/run?', 'log/round%d/result.html' %GLOBAL.round)    
         GLOBAL.round += 1
         #time.sleep(GLOBAL.interval)
         #time.sleep(10)

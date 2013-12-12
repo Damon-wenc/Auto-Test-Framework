@@ -46,12 +46,15 @@ def get_tag_value():
             value[name] = 'align=middle bgcolor="limegreen"'
 
 def test_prepare():
-    os.chdir('log')
+    os.chdir('./log')
     dirs = os.listdir('.')
+    pack_dir = 'timebefore%s' %time.strftime('%H_%M_%m_%d_%Y', time.localtime(time.time()))
     
-    for dir in dirs:
-        if dir.find('timebefore'):
-            shutil.move(dir, 'timebefore%s' %time.strftime('%H_%M_%m_%d_%Y', time.localtime(time.time())))
+    for folder in dirs:
+        if 0 != folder.find('timebefore'):
+            if False == os.path.exists(pack_dir):
+                os.mkdir(pack_dir)
+            shutil.move(folder, pack_dir)
     
     os.chdir('..')
 

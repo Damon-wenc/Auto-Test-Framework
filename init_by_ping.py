@@ -10,10 +10,13 @@ def ping_ip(index):
     output = ret.stdout.read()
 
     err = '往返行程的估计时间'
+    online_str2 = 'Approximate round trip times in milli-seconds'
 
     #print output.find(err)
 
-    ret = output.find(err)
+    ret = output.find(online_str1)
+    if ret == -1:
+        ret = output.find(online_str2)
 
     if ret == -1:
         return False

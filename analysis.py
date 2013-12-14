@@ -2,6 +2,7 @@ import os
 import GLOBAL
 
 keyword_arr = ['Called Memory smash',
+'404 - Not Found',
 'A packet data pointer has size',
 'Call Trace',
 'NMI Watchdog interrupt',

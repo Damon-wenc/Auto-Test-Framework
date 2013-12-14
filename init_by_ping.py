@@ -9,7 +9,7 @@ def ping_ip(index):
 
     output = ret.stdout.read()
 
-    err = '往返行程的估计时间'
+    online_str1 = '往返行程的估计时间'
     online_str2 = 'Approximate round trip times in milli-seconds'
 
     #print output.find(err)

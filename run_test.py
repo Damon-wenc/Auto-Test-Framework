@@ -3,22 +3,28 @@ import analysis
 import threading
 import urllib
 import ssh
-import time
 
 class retrieve_log(threading.Thread):
-    def __init__(self, index):
+    def __init__(self, index, name):
         threading.Thread.__init__(self)
         self.index = index
-        self.url = 'http://192.168.1.' + str(index) + ':8081/upload/log'
+        self.url = 'http://192.168.1.' + str(index) + ':8081/upload/log_' + name
+        self.name = str(index) + '_' + name
     def run(self):
-        urllib.urlretrieve(self.url, "./log/round%d/%d" %(GLOBAL.round, self.index))
+        urllib.urlretrieve(self.url, "./log/round%d/%s" %(GLOBAL.round, self.name))
         
 def get_log():
     for name,address in GLOBAL.enc_status.items():
         if address == 1:
-            t = retrieve_log(name)
-            t.start()
-            t.join()
+            t1 = retrieve_log(name, 'disk')
+            t2 = retrieve_log(name, 'led')
+            t3 = retrieve_log(name, 'nic')
+            t1.start()
+            t2.start()
+            t3.start()
+            t1.join()
+            t2.join()
+            t3.join()
         else:
             #print 'enc absent'
             continue
@@ -65,10 +71,8 @@ def cli_start():
 
 def run():
     #cli_start()
-    #while True:
     get_log()
     check_log()
-    #time.sleep(GLOBAL.interval)
 
 if __name__ == '__main__':
     #print GLOBAL.enc_status

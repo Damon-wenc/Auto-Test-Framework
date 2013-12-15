@@ -1,12 +1,14 @@
-enc_status = {19:0}
+# -*- coding: cp936 -*- 
 
-max_enc = 20
+enc_status = {}
 
-#for i in range (1, max_enc + 1):
-    #enc_status[i] = 0
+max_enc = 100
 
-ipaddr = '192.168.1.'
+for i in range (101, max_enc + 101):
+    enc_status[i] = 0
+
+ipaddr = '192.168.2.'
 
 interval = 60 * 30 #30 minutes
 
-round = 1
+test_round = 1

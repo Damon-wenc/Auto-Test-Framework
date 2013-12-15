@@ -1,3 +1,5 @@
+# -*- coding: cp936 -*- 
+
 import os
 import GLOBAL
 
@@ -22,9 +24,9 @@ filelist = ['disk',
 # return  inexiste:-1 error/null:0 right:1
 def filecheck(int_val):
     #filename = str(int_val)
-    for file in filelist:
+    for item in filelist:
         filename = ''
-        filename = './log/round' + str(GLOBAL.round) + '/' + str(int_val) + '_' + file
+        filename = './log/round' + str(GLOBAL.test_round) + '/' + str(int_val) + '_' + item
         #print filename
         if os.path.exists(filename) == False:
             return -1

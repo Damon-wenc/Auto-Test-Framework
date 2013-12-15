@@ -1,4 +1,5 @@
 # -*- coding: cp936 -*- 
+
 import subprocess
 import threading
 import GLOBAL
@@ -15,10 +16,10 @@ def ping_ip(index):
     #print output.find(err)
 
     ret = output.find(online_str1)
-    if ret == -1:
+    if -1 == ret:
         ret = output.find(online_str2)
 
-    if ret == -1:
+    if -1 == ret:
         return False
     else:
         return True
@@ -29,7 +30,7 @@ class check_if_online(threading.Thread):
         self.index = index
     def run(self):
         ret = ping_ip(self.index)
-        if ret == True:
+        if True == ret:
             GLOBAL.enc_status[self.index] = 1
         else:
             GLOBAL.enc_status[self.index] = 0

@@ -1,4 +1,12 @@
 # -*- coding: cp936 -*- 
+'''
+Created on December 13th, 2013
+
+Global variables in multi files
+
+@author: Damon
+'''
+
 
 enc_status = {}
 

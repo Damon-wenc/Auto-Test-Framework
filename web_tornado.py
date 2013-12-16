@@ -1,4 +1,22 @@
-# -*- coding: cp936 -*- 
+# -*- coding: cp936 -*-
+'''
+Created on December 13th, 2013
+
+My main function, invoking other modules.
+I need a control centor to handle 100 devices at the same time, but I don't want to develop a complex win32 client, 
+so I seek help from tornado(web), a clear, light and easy-maintainable web frame. 
+Showing device status & test result with Green(OK), Red(error occurs) and Grey(offline)
+For more tornado info, visit here: http://www.tornadoweb.org/en/stable/
+I only build a simple version web with 4 buttons: init, start, stop, open_log.
+    init:     run ping test to get the status of all the devices, record online ones for further test;
+    start:    send start test cmd to device, and retrieve & analysis log every 30 minutes(invoked by web auto refresh), give warning if any error occurs;
+    stop:     send stop test cmd to device, stop the test loop;
+    open_log: open log dir for manual analysis.
+Maybe some scripts works only on Windows, I haven't tested them on some other OS yet. 
+
+@author: Damon
+''' 
+
 
 import os
 import shutil

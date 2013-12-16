@@ -1,4 +1,13 @@
 # -*- coding: cp936 -*- 
+'''
+Created on December 13th, 2013
+
+Defines send_cmd, get_log and check_log functions, all of them are with multi-thread method
+start function invokes send_cmd, get_log & check_log,
+and stop funcion invokes send_cmd only
+
+@author: Damon
+'''
 
 import GLOBAL
 import analysis

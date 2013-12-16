@@ -1,4 +1,34 @@
 # -*- coding: cp936 -*- 
+'''
+Created on December 13th, 2013
+
+For Windows only.
+Using multi-thread(saving time) to check if a device is online by checking the return value of ping test.
+If a device is online, the stdout may like this:
+---
+Pinging 192.168.1.1 with 32 bytes of data:
+
+Reply from 192.168.1.1: bytes=32 time=1ms TTL=255
+
+Ping statistics for 192.168.1.1:
+    Packets: Sent = 1, Received = 1, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 1ms, Average = 1ms
+---
+and if it's offline, stdout may like this:
+---
+Pinging 192.168.1.3 with 32 bytes of data:
+
+Request timed out.
+
+Ping statistics for 192.168.1.3:
+    Packets: Sent = 1, Received = 0, Lost = 1 (100% loss),
+---
+So I get its status by searching 'success flag', both on Chinese & English Windows OS.
+
+@author: Damon
+'''
+
 
 import subprocess
 import threading

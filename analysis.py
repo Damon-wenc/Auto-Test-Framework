@@ -1,25 +1,34 @@
 # -*- coding: cp936 -*- 
+'''
+Created on December 13th, 2013
+
+log analysis module
+Analysising log with error keywords, currently only return 3 status
+
+@author: XieDongsheng
+'''
+
 
 import os
 import GLOBAL
 
 keyword_arr = ['Called Memory smash',
-'404 - Not Found',
-'A packet data pointer has size',
-'Call Trace',
-'NMI Watchdog interrupt',
-'Unable to handle kernel',
-'Segmentation fault',
-'bus error',
-'Failed WQE allocate',
-'UBIFS error',
-'ECC'
-]
+               '404 - Not Found',
+               'A packet data pointer has size',
+               'Call Trace',
+               'NMI Watchdog interrupt',
+               'Unable to handle kernel',
+               'Segmentation fault',
+               'bus error',
+               'Failed WQE allocate',
+               'UBIFS error',
+               'ECC'
+               ]
 
 filelist = ['disk',
-'led',
-'nic'
-]
+            'led',
+            'nic'
+            ]
 
 # return  inexiste:-1 error/null:0 right:1
 def filecheck(int_val):

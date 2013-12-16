@@ -1,4 +1,14 @@
 # -*- coding: cp936 -*- 
+'''
+Created on December 13th, 2013
+
+This file defines my method to connect to device.
+Usually, using 'paramiko' or 'Pexpect' module is better at most cases, but my device got a weird ssh server, 
+it can't response to the two above modules, so I've got to try using a third party software.
+Of course on Windows only.
+
+@author: Damon
+'''
 
 import subprocess as subp
 import GLOBAL

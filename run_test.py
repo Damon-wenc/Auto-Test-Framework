@@ -19,7 +19,7 @@ class retrieve_log(threading.Thread):
     def __init__(self, index, name):
         threading.Thread.__init__(self)
         self.index = index
-        self.url = 'http://192.168.1.' + str(index) + ':8081/upload/log_' + name
+        self.url = 'http://%s'%GLOBAL.ipaddr + str(index) + ':8081/upload/log_' + name
         self.name = str(index) + '_' + name
     def run(self):
         urllib.urlretrieve(self.url, "./log/round%d/%s" %(GLOBAL.test_round, self.name))

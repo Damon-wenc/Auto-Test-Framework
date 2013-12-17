@@ -35,7 +35,7 @@ from tornado.options import define, options
 
 define("port", default=8888, help="run on the given port", type=int)
 
-value = {}
+color_str = {}
 flag_run_test = False
 
 class MainHandler(tornado.web.RequestHandler):
@@ -44,26 +44,26 @@ class MainHandler(tornado.web.RequestHandler):
 
 class InitHandler(tornado.web.RequestHandler):
     def get(self):
-        global value, flag_run_test
-        value = {}
+        global color_str, flag_run_test
+        color_str = {}
         flag_run_test = False
         test_prepare()
         init_by_ping.run()
         get_color_str()
         self.render("test_result.html", flag = '<br/>', 
                     ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = 'initialization', 
-                    tags = value
+                    tags = color_str
                     )
 
 def get_color_str():
-    global value
+    global color_str
     for name,address in GLOBAL.enc_status.items():
         if address == -1:
-            value[name] = 'align=middle bgcolor="red"'
+            color_str[name] = 'align=middle bgcolor="red"'
         elif address == 0:
-            value[name] = 'align=middle bgcolor="grey"'
+            color_str[name] = 'align=middle bgcolor="grey"'
         else:
-            value[name] = 'align=middle bgcolor="limegreen"'
+            color_str[name] = 'align=middle bgcolor="limegreen"'
 
 def test_prepare():
     os.chdir('./log')
@@ -93,7 +93,7 @@ class StopHandler(tornado.web.RequestHandler):
         
 class StartHandler(tornado.web.RequestHandler):
     def get(self):
-        global flag_run_test, value
+        global flag_run_test, color_str
         if 1 == GLOBAL.test_round:
             flag_run_test = True
         if flag_run_test:
@@ -101,13 +101,13 @@ class StartHandler(tornado.web.RequestHandler):
         else:
             web_refresh = '<br/>'
         print flag_run_test
-        value = {}
+        color_str = {}
         os.makedirs("log/round%d" %GLOBAL.test_round)
         run_test.start()
         get_color_str()
         self.render("test_result.html", flag = web_refresh, 
                     ctime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = GLOBAL.test_round, 
-                    tags = value
+                    tags = color_str
                     )  
         GLOBAL.test_round += 1
 

@@ -52,18 +52,18 @@ class InitHandler(tornado.web.RequestHandler):
         get_color_str()
         self.render("test_result.html", flag = '<br/>', 
                     ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = 'initialization', 
-                    tags = color_str
+                    color = color_str
                     )
 
 def get_color_str():
     global color_str
     for name,address in GLOBAL.enc_status.items():
         if address == -1:
-            color_str[name] = 'align=middle bgcolor="red"'
+            color_str[name] = 'bgcolor="red"'
         elif address == 0:
-            color_str[name] = 'align=middle bgcolor="grey"'
+            color_str[name] = 'bgcolor="grey"'
         else:
-            color_str[name] = 'align=middle bgcolor="limegreen"'
+            color_str[name] = 'bgcolor="limegreen"'
 
 def test_prepare():
     os.chdir('./log')
@@ -107,7 +107,7 @@ class StartHandler(tornado.web.RequestHandler):
         get_color_str()
         self.render("test_result.html", flag = web_refresh, 
                     ctime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = GLOBAL.test_round, 
-                    tags = color_str
+                    color = color_str
                     )  
         GLOBAL.test_round += 1
 

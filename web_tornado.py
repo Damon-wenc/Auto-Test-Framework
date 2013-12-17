@@ -79,9 +79,12 @@ def test_prepare():
     os.chdir('..')
 
 class OpenlogHandler(tornado.web.RequestHandler):
-    def get(self):
+    def get(self, log_round):
         log_path = os.getcwd()
-        os.system("explorer.exe %s\log" %log_path)
+        if '0' == log_round:
+            os.system("explorer.exe %s\log" %log_path)
+        else:
+            os.system(r"explorer.exe %s\log\round%s" %(log_path, log_round))
     
 class StopHandler(tornado.web.RequestHandler):
     def get(self):
@@ -120,7 +123,7 @@ def main():
         (r"/init", InitHandler),
         (r"/run", StartHandler),
         (r"/stop", StopHandler),
-        (r"/open_log", OpenlogHandler)],
+        (r"/open_round/([0-9]+)", OpenlogHandler)],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
     )
     http_server = tornado.httpserver.HTTPServer(application)

@@ -52,7 +52,7 @@ class InitHandler(tornado.web.RequestHandler):
         get_color_str()
         self.render("test_result.html", flag = '<br/>', 
                     ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = 'initialization', 
-                    color = color_str
+                    color = color_str, url = GLOBAL.log_dir
                     )
 
 def get_color_str():
@@ -107,7 +107,7 @@ class StartHandler(tornado.web.RequestHandler):
         get_color_str()
         self.render("test_result.html", flag = web_refresh, 
                     ctime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = GLOBAL.test_round, 
-                    color = color_str
+                    color = color_str, url = GLOBAL.log_dir
                     )  
         GLOBAL.test_round += 1
 

@@ -9,7 +9,7 @@
 {% if name % 10 == 1 %}
 <tr>
 {% end %}
-<td align=middle {{address}}>{{name}}</td>
+<td align=middle {{address}}><a href="/open_round_{{url[name]}}">{{name}}</a></td>
 {% if name % 10 == 0 %}
 </tr>
 {% end %}

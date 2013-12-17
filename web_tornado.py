@@ -49,13 +49,13 @@ class InitHandler(tornado.web.RequestHandler):
         flag_run_test = False
         test_prepare()
         init_by_ping.run()
-        get_tag_value()
+        get_color_str()
         self.render("test_result.html", flag = '<br/>', 
                     ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = 'initialization', 
                     tags = value
                     )
 
-def get_tag_value():
+def get_color_str():
     global value
     for name,address in GLOBAL.enc_status.items():
         if address == -1:
@@ -104,7 +104,7 @@ class StartHandler(tornado.web.RequestHandler):
         value = {}
         os.makedirs("log/round%d" %GLOBAL.test_round)
         run_test.start()
-        get_tag_value()
+        get_color_str()
         self.render("test_result.html", flag = web_refresh, 
                     ctime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = GLOBAL.test_round, 
                     tags = value

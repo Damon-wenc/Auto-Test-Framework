@@ -35,7 +35,7 @@ from tornado.options import define, options
 
 define("port", default=8888, help="run on the given port", type=int)
 
-value = {}
+color_str = {}
 flag_run_test = False
 
 class MainHandler(tornado.web.RequestHandler):
@@ -44,26 +44,26 @@ class MainHandler(tornado.web.RequestHandler):
 
 class InitHandler(tornado.web.RequestHandler):
     def get(self):
-        global value, flag_run_test
-        value = {}
+        global color_str, flag_run_test
+        color_str = {}
         flag_run_test = False
         test_prepare()
         init_by_ping.run()
-        get_tag_value()
+        get_color_str()
         self.render("test_result.html", flag = '<br/>', 
                     ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = 'initialization', 
-                    tags = value
+                    color = color_str, url = GLOBAL.log_dir
                     )
 
-def get_tag_value():
-    global value
+def get_color_str():
+    global color_str
     for name,address in GLOBAL.enc_status.items():
         if address == -1:
-            value[name] = 'align=middle bgcolor="red"'
+            color_str[name] = 'bgcolor="red"'
         elif address == 0:
-            value[name] = 'align=middle bgcolor="grey"'
+            color_str[name] = 'bgcolor="grey"'
         else:
-            value[name] = 'align=middle bgcolor="limegreen"'
+            color_str[name] = 'bgcolor="limegreen"'
 
 def test_prepare():
     os.chdir('./log')
@@ -79,9 +79,12 @@ def test_prepare():
     os.chdir('..')
 
 class OpenlogHandler(tornado.web.RequestHandler):
-    def get(self):
+    def get(self, log_round):
         log_path = os.getcwd()
-        os.system("explorer.exe %s\log" %log_path)
+        if '0' == log_round:
+            os.system("explorer.exe %s\log" %log_path)
+        else:
+            os.system(r"explorer.exe %s\log\round%s" %(log_path, log_round))
     
 class StopHandler(tornado.web.RequestHandler):
     def get(self):
@@ -93,7 +96,7 @@ class StopHandler(tornado.web.RequestHandler):
         
 class StartHandler(tornado.web.RequestHandler):
     def get(self):
-        global flag_run_test, value
+        global flag_run_test, color_str
         if 1 == GLOBAL.test_round:
             flag_run_test = True
         if flag_run_test:
@@ -101,13 +104,13 @@ class StartHandler(tornado.web.RequestHandler):
         else:
             web_refresh = '<br/>'
         print flag_run_test
-        value = {}
+        color_str = {}
         os.makedirs("log/round%d" %GLOBAL.test_round)
         run_test.start()
-        get_tag_value()
+        get_color_str()
         self.render("test_result.html", flag = web_refresh, 
                     ctime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = GLOBAL.test_round, 
-                    tags = value
+                    color = color_str, url = GLOBAL.log_dir
                     )  
         GLOBAL.test_round += 1
 
@@ -120,7 +123,7 @@ def main():
         (r"/init", InitHandler),
         (r"/run", StartHandler),
         (r"/stop", StopHandler),
-        (r"/open_log", OpenlogHandler)],
+        (r"/open_round/([0-9]+)", OpenlogHandler)],
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
     )
     http_server = tornado.httpserver.HTTPServer(application)

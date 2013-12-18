@@ -80,11 +80,26 @@ def send_cmd(cmd):
             #print 'enc skipped'
             continue
 
+def set_log_dir():
+    if 1 == GLOBAL.test_round:
+        for name, address in GLOBAL.enc_status.items():
+            if 0 == address:
+                continue
+            else:
+                GLOBAL.log_dir[name] = 1
+    else:
+        for name,address in GLOBAL.enc_status.items():
+            if 0 == address or -1 == address:
+                continue
+            else:
+                GLOBAL.log_dir[name] = GLOBAL.test_round
+
 def start():
     if 1 == GLOBAL.test_round:
         send_cmd('start')
     get_log()
     check_log()
+    set_log_dir()
     
 def stop():
     send_cmd('stop')

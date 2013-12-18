@@ -24,21 +24,16 @@ class retrieve_log(threading.Thread):
     def run(self):
         urllib.urlretrieve(self.url, "./log/round%d/%s" %(GLOBAL.test_round, self.name))
         
-def get_log():
-    for name,address in GLOBAL.enc_status.items():
-        if 1 == address:
-            t1 = retrieve_log(name, 'disk')
-            t2 = retrieve_log(name, 'led')
-            t3 = retrieve_log(name, 'nic')
-            t1.start()
-            t2.start()
-            t3.start()
-            t1.join()
-            t2.join()
-            t3.join()
-        else:
-            #print 'enc absent'
-            continue
+def get_log(name):
+    t1 = retrieve_log(name, 'disk')
+    t2 = retrieve_log(name, 'led')
+    t3 = retrieve_log(name, 'nic')
+    t1.start()
+    t2.start()
+    t3.start()
+    t1.join()
+    t2.join()
+    t3.join()
 
 class check_log_status(threading.Thread):
     def __init__(self, index):
@@ -51,14 +46,10 @@ class check_log_status(threading.Thread):
         else:
             GLOBAL.enc_status[self.index] = -1
 
-def check_log():
-    for name,address in GLOBAL.enc_status.items():
-        if 1 == address:
-            t = check_log_status(name)
-            t.start()
-            t.join()
-        else:
-            continue
+def check_log(name):
+    t = check_log_status(name)
+    t.start()
+    t.join()
 
 class enc_run_cmd(threading.Thread):
     def __init__(self, name, cmd):
@@ -69,40 +60,27 @@ class enc_run_cmd(threading.Thread):
         print self.name
         ssh.run(self.name, self.cmd)
                     
-def send_cmd(cmd):
-    print GLOBAL.enc_status
-    for name,address in GLOBAL.enc_status.items():
-        if 1 == address:       
-            t = enc_run_cmd(name, cmd)
-            t.start()
-            t.join()
-        else:
-            #print 'enc skipped'
-            continue
+def send_cmd(name, cmd):
+    t = enc_run_cmd(name, cmd)
+    t.start()
+    t.join()
 
-def set_log_dir():
-    if 1 == GLOBAL.test_round:
-        for name, address in GLOBAL.enc_status.items():
-            if 0 == address:
-                continue
-            else:
-                GLOBAL.log_dir[name] = 1
-    else:
-        for name,address in GLOBAL.enc_status.items():
-            if 0 == address or -1 == address:
-                continue
-            else:
-                GLOBAL.log_dir[name] = GLOBAL.test_round
+def set_log_dir(name):
+    GLOBAL.log_dir[name] = GLOBAL.test_round
 
 def start():
-    if 1 == GLOBAL.test_round:
-        send_cmd('start')
-    get_log()
-    check_log()
-    set_log_dir()
+    for name, address in GLOBAL.enc_status.items():
+        if 1 == address:
+            if 1 == GLOBAL.test_round:
+                send_cmd(name, 'start')
+            get_log(name)
+            check_log(name)
+            set_log_dir(name)
     
 def stop():
-    send_cmd('stop')
+    for name, address in GLOBAL.enc_status.items():
+        if 0 != address:
+            send_cmd(name, 'stop')
 
 if __name__ == '__main__':
     GLOBAL.enc_status = {19 : 1}

@@ -40,7 +40,13 @@ flag_run_test = False
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index_show.html")
+        global color_str
+        color_str = {}
+        get_color_str()
+        self.render("index.html", flag = " ",
+                    color = color_str, url = GLOBAL.log_dir,
+                    tstatus = "not running", tround = "not yet", ttime = "not yet"
+                    )
 
 class InitHandler(tornado.web.RequestHandler):
     def get(self):
@@ -50,9 +56,40 @@ class InitHandler(tornado.web.RequestHandler):
         test_prepare()
         init_by_ping.run()
         get_color_str()
-        self.render("test_result.html", flag = '<br/>', 
-                    ctime=time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = 'initialization', 
-                    color = color_str, url = GLOBAL.log_dir
+        self.render("index.html", flag = " ",
+                    color = color_str, url = GLOBAL.log_dir,
+                    tstatus = "initialization", tround = "not yet", ttime = "not yet"
+                    )
+
+class StartHandler(tornado.web.RequestHandler):
+    def get(self):
+        global flag_run_test, color_str
+        if 1 == GLOBAL.test_round:
+            flag_run_test = True
+        if flag_run_test:
+            web_refresh = '<meta http-equiv="refresh" content="' + str(GLOBAL.interval) + '">'
+        else:
+            web_refresh = ' '
+        color_str = {}
+        os.makedirs("log/round%d" %GLOBAL.test_round)
+        run_test.start()
+        get_color_str()
+        self.render("index.html", flag = web_refresh,
+                    color = color_str, url = GLOBAL.log_dir,
+                    tstatus = "running", tround = GLOBAL.test_round, ttime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time()))
+                    )
+        GLOBAL.test_round += 1
+
+class StopHandler(tornado.web.RequestHandler):
+    def get(self):
+        global flag_run_test, color_str
+        flag_run_test = False
+        run_test.stop()
+        color_str = {}
+        get_color_str()
+        self.render("index.html", flag = " ",
+                    color = color_str, url = GLOBAL.log_dir,
+                    tstatus = "stopped", tround = GLOBAL.test_round, ttime = "not yet"
                     )
 
 def get_color_str():
@@ -86,35 +123,6 @@ class OpenlogHandler(tornado.web.RequestHandler):
         else:
             os.system(r"explorer.exe %s\log\round%s" %(log_path, log_round))
     
-class StopHandler(tornado.web.RequestHandler):
-    def get(self):
-        global flag_run_test
-        flag_run_test = False
-        run_test.stop()
-        self.render("stop.html")
-        
-        
-class StartHandler(tornado.web.RequestHandler):
-    def get(self):
-        global flag_run_test, color_str
-        if 1 == GLOBAL.test_round:
-            flag_run_test = True
-        if flag_run_test:
-            web_refresh = '<head><meta http-equiv="refresh" content="' + str(GLOBAL.interval) + '"></head>'
-        else:
-            web_refresh = '<br/>'
-        print flag_run_test
-        color_str = {}
-        os.makedirs("log/round%d" %GLOBAL.test_round)
-        run_test.start()
-        get_color_str()
-        self.render("test_result.html", flag = web_refresh, 
-                    ctime = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time())), tround = GLOBAL.test_round, 
-                    color = color_str, url = GLOBAL.log_dir
-                    )  
-        GLOBAL.test_round += 1
-
-
 def main():
     tornado.options.parse_command_line()
     webbrowser.open_new_tab('http://localhost:8888')

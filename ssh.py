@@ -20,6 +20,7 @@ def run(enc_index, cmd):
     connect.stdin.write("login -n admin -p admin\n")
     connect.stdin.write("hwtest -t %s\n" %cmd)
     connect.stdin.write("quit\n")
+    connect.wait()
 
 
 if __name__ == '__main__':

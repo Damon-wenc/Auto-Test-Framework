@@ -22,7 +22,9 @@ keyword_arr = ['Called Memory smash',
                'bus error',
                'Failed WQE allocate',
                'UBIFS error',
-               'ECC'
+               'ECC',
+               'Unhandled error code',
+               'Sense Key :'
                ]
 
 filelist = ['disk',

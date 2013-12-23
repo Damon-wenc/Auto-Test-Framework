@@ -53,6 +53,7 @@ class InitHandler(tornado.web.RequestHandler):
         global color_str, flag_run_test
         color_str = {}
         flag_run_test = False
+        GLOBAL.test_round = 1
         test_prepare()
         init_by_ping.run()
         get_color_str()

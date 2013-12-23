@@ -14,6 +14,7 @@ import analysis
 import threading
 import urllib
 import ssh
+import time
 
 class retrieve_log(threading.Thread):
     def __init__(self, index, name):
@@ -66,6 +67,7 @@ def start():
         if 1 == address:
             if 1 == GLOBAL.test_round:
                 send_cmd(name, 'start')
+                time.sleep(15)
             get_log(name)
             check_log(name)
             set_log_dir(name)

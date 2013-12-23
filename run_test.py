@@ -57,7 +57,6 @@ class enc_run_cmd(threading.Thread):
         self.name = name
         self.cmd = cmd
     def run(self):
-        print self.name
         ssh.run(self.name, self.cmd)
                     
 def send_cmd(name, cmd):

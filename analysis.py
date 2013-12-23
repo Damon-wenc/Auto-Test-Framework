@@ -27,9 +27,9 @@ keyword_arr = ['Called Memory smash',
                'Sense Key :'
                ]
 
-filelist = ['disk',
-#            'led',
-            'nic'
+filelist = ['heat'
+#            ,'led',
+#            'nic'
             ]
 
 # return  inexiste:-1 error/null:0 right:1
@@ -58,10 +58,4 @@ def filecheck(int_val):
 if __name__ == '__main__':
     ret = filecheck(19)
     print ret
-    #ret = filecheck(2)
-    #print ret
-    #ret = filecheck(3)
-    #print ret
-    #ret = filecheck(4)
-    #print ret
 

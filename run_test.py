@@ -25,15 +25,9 @@ class retrieve_log(threading.Thread):
         urllib.urlretrieve(self.url, "./log/round%d/%s" %(GLOBAL.test_round, self.name))
         
 def get_log(name):
-    t1 = retrieve_log(name, 'disk')
-    t2 = retrieve_log(name, 'led')
-    t3 = retrieve_log(name, 'nic')
+    t1 = retrieve_log(name, 'heat')
     t1.start()
-    t2.start()
-    t3.start()
     t1.join()
-    t2.join()
-    t3.join()
 
 class check_log_status(threading.Thread):
     def __init__(self, index):

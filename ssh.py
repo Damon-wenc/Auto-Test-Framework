@@ -12,15 +12,39 @@ Of course on Windows only.
 
 import subprocess as subp
 import GLOBAL
+import time
 
 
 def run(enc_index, cmd):
+    if 'start' == cmd:
+        retry_times = 1
+    else:
+        retry_times = 10
+    count = 0
+    
     connect = subp.Popen(["plink.exe", '-ssh', 'root@%s%s' %(GLOBAL.ipaddr, enc_index), '-pw', 'root'],\
                          stdout=subp.PIPE, stderr=subp.PIPE, stdin=subp.PIPE)
     connect.stdin.write("login -n admin -p admin\n")
     connect.stdin.write("hwtest -t %s\n" %cmd)
     connect.stdin.write("quit\n")
-    connect.wait()
+    time.sleep(5)
+    #connect.wait()
+    while True:
+        if 0 == connect.poll():
+            break
+        elif retry_times == count:
+            break
+        else:
+            connect.kill()
+            connect = subp.Popen(["plink.exe", '-ssh', 'root@%s%s' %(GLOBAL.ipaddr, enc_index), '-pw', 'root'],\
+                         stdout=subp.PIPE, stderr=subp.PIPE, stdin=subp.PIPE)
+            connect.stdin.write("login -n admin -p admin\n")
+            connect.stdin.write("hwtest -t %s\n" %cmd)
+            connect.stdin.write("quit\n")
+            time.sleep(5)
+            count += 1
+            #connect.wait()
+            
 
 
 if __name__ == '__main__':

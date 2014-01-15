@@ -23,11 +23,12 @@ def run(enc_index, cmd):
     count = 0
     
     connect = subp.Popen(["plink.exe", '-ssh', 'root@%s%s' %(GLOBAL.ipaddr, enc_index), '-pw', 'root'],\
-                         stdout=subp.PIPE, stderr=subp.PIPE, stdin=subp.PIPE)
+                         stdin=subp.PIPE)
+    connect.stdin.write("y\n")
     connect.stdin.write("login -n admin -p admin\n")
     connect.stdin.write("hwtest -t %s\n" %cmd)
     connect.stdin.write("quit\n")
-    time.sleep(5)
+    time.sleep(30)
     #connect.wait()
     while True:
         if 0 == connect.poll():
@@ -38,11 +39,12 @@ def run(enc_index, cmd):
             connect.kill()
             connect = subp.Popen(["plink.exe", '-ssh', 'root@%s%s' %(GLOBAL.ipaddr, enc_index), '-pw', 'root'],\
                          stdout=subp.PIPE, stderr=subp.PIPE, stdin=subp.PIPE)
+            connect.stdin.write("y\n")
             connect.stdin.write("login -n admin -p admin\n")
             connect.stdin.write("hwtest -t %s\n" %cmd)
             connect.stdin.write("quit\n")
             count += 1
-            time.sleep(5)
+            time.sleep(60)
             #connect.wait()
             
 

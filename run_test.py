@@ -32,7 +32,7 @@ def get_log():
             thread_pool.append(retrieve_log(name, 'heat'))
     for t in thread_pool:
         t.start()
-        time.sleep(1)
+        #time.sleep(5)
     for t in thread_pool:
         t.join()
 
@@ -84,7 +84,7 @@ def set_log_dir():
 def start():
     if 1 == GLOBAL.test_round:
         send_cmd('start')
-        time.sleep(15)
+        time.sleep(60)
     set_log_dir()
     get_log()
     check_log()

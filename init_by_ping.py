@@ -35,7 +35,7 @@ import threading
 import GLOBAL
 
 def ping_ip(index):
-    ret = subprocess.Popen('ping -n 1 %s%d' %(GLOBAL.ipaddr, index), stdin = subprocess.PIPE, \
+    ret = subprocess.Popen('ping -n 1 %s%d -w 10' %(GLOBAL.ipaddr, index), stdin = subprocess.PIPE, \
                            stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
 
     output = ret.stdout.read()

@@ -24,7 +24,8 @@ keyword_arr = ['Called Memory smash',
                'UBIFS error',
                'ECC',
                'Unhandled error code',
-               'Sense Key :'
+               'Sense Key :',
+               'Connection timed out'
                ]
 
 filelist = ['heat'

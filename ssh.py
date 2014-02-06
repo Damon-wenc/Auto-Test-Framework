@@ -17,9 +17,9 @@ import time
 
 def run(enc_index, cmd):
     if 'start' == cmd:
-        retry_times = 1
+        retry_times = 3
     else:
-        retry_times = 10
+        retry_times = 20
     count = 0
     
     connect = subp.Popen(["plink.exe", '-ssh', 'root@%s%s' %(GLOBAL.ipaddr, enc_index), '-pw', 'root'],\

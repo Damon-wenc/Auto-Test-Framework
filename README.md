@@ -1,4 +1,4 @@
-Web_based_test_system
+Auto-Test-Framework
 =====================
 
-An automatic &amp; light test system based on html &amp; python; python do the logic, and web(html) display it.
+An automatic &amp; light test framework based on Python &amp; HTML; python do the logic, and web(HTML) display it.

@@ -5,7 +5,7 @@ Created on December 13th, 2013
 log analysis module
 Analysising log with error keywords, currently only return 3 status
 
-@author: XieDongsheng
+@author: XieDongsheng, Damon
 '''
 
 

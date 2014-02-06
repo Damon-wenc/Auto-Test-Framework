@@ -37,7 +37,8 @@ define("port", default=8888, help="run on the given port", type=int)
 
 color_str = {}
 flag_run_test = False
-start_time = ""
+
+start_time = 0.0
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -46,7 +47,7 @@ class MainHandler(tornado.web.RequestHandler):
         get_color_str()
         self.render("index.html", flag = " ",
                     color = color_str, url = GLOBAL.log_dir,
-                    tstatus = "not running", tround = "not yet", ttime = "not yet"
+                    tstatus = "not running", tround = "not yet", ttime = "not yet", tlast = "not yet"
                     )
 
 class InitHandler(tornado.web.RequestHandler):
@@ -55,13 +56,13 @@ class InitHandler(tornado.web.RequestHandler):
         color_str = {}
         flag_run_test = False
         GLOBAL.test_round = 1
-        start_time = ""
+        start_time = time.time()
         test_prepare()
         init_by_ping.run()
         get_color_str()
         self.render("index.html", flag = " ",
                     color = color_str, url = GLOBAL.log_dir,
-                    tstatus = "initialization", tround = "not yet", ttime = "not yet"
+                    tstatus = "initialization", tround = "not yet", ttime = "not yet", tlast = "not yet"
                     )
 
 class StartHandler(tornado.web.RequestHandler):
@@ -69,7 +70,7 @@ class StartHandler(tornado.web.RequestHandler):
         global flag_run_test, color_str, start_time
         if 1 == GLOBAL.test_round:
             flag_run_test = True
-            start_time = time.strftime('%H:%M %m-%d-%Y', time.localtime(time.time()))
+            start_time = time.time()
         if flag_run_test:
             web_refresh = '<meta http-equiv="refresh" content="' + str(GLOBAL.interval) + '">'
         else:
@@ -80,7 +81,7 @@ class StartHandler(tornado.web.RequestHandler):
         get_color_str()
         self.render("index.html", flag = web_refresh,
                     color = color_str, url = GLOBAL.log_dir,
-                    tstatus = "running", tround = GLOBAL.test_round, ttime = start_time
+                    tstatus = "running", tround = GLOBAL.test_round, ttime = time.strftime('%H:%M %m-%d-%Y', time.localtime(start_time)), tlast = "%.1f hours" %((time.time()-start_time)/60/60)
                     )
         GLOBAL.test_round += 1
 
@@ -93,7 +94,7 @@ class StopHandler(tornado.web.RequestHandler):
         get_color_str()
         self.render("index.html", flag = " ",
                     color = color_str, url = GLOBAL.log_dir,
-                    tstatus = "stopped", tround = GLOBAL.test_round, ttime = start_time
+                    tstatus = "stopped", tround = GLOBAL.test_round, ttime = time.strftime('%H:%M %m-%d-%Y', time.localtime(start_time)), tlast = "%.1f hours" %((time.time()-start_time)/60/60)
                     )
 
 def get_color_str():

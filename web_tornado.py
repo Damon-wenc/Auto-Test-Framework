@@ -29,13 +29,14 @@ import GLOBAL
 import init_by_ping
 import webbrowser
 import run_test
+from collections import OrderedDict
 
 
 from tornado.options import define, options
 
 define("port", default=8888, help="run on the given port", type=int)
 
-color_str = {}
+color_str = OrderedDict()
 flag_run_test = False
 
 start_time = 0.0
@@ -43,7 +44,7 @@ start_time = 0.0
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         global color_str
-        color_str = {}
+        color_str = OrderedDict()
         get_color_str()
         self.render("index.html", flag = " ",
                     color = color_str, url = GLOBAL.log_dir,
@@ -53,7 +54,7 @@ class MainHandler(tornado.web.RequestHandler):
 class InitHandler(tornado.web.RequestHandler):
     def get(self):
         global color_str, flag_run_test, start_time
-        color_str = {}
+        color_str = OrderedDict()
         flag_run_test = False
         GLOBAL.test_round = 1
         start_time = time.time()
@@ -75,7 +76,7 @@ class StartHandler(tornado.web.RequestHandler):
             web_refresh = '<meta http-equiv="refresh" content="' + str(GLOBAL.interval) + '">'
         else:
             web_refresh = ' '
-        color_str = {}
+        color_str = OrderedDict()
         os.makedirs("log/round%d" %GLOBAL.test_round)
         run_test.start()
         get_color_str()
@@ -90,7 +91,7 @@ class StopHandler(tornado.web.RequestHandler):
         global flag_run_test, color_str, start_time
         flag_run_test = False
         run_test.stop()
-        color_str = {}
+        color_str = OrderedDict()
         get_color_str()
         self.render("index.html", flag = " ",
                     color = color_str, url = GLOBAL.log_dir,

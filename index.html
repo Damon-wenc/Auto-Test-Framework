@@ -59,7 +59,9 @@
 <a name="%E6%A1%86%E6%9E%B6" class="anchor" href="#%E6%A1%86%E6%9E%B6"><span class="octicon octicon-link"></span></a>框架</h3>
 
 <p>整套代码不到600行, 大体框架如下图
-<img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png" alt="structure"><strong>web_tornado.py</strong>是主函数, 由tornado这个库发力.[<a href="http://www.tornadoweb.org/en/stable/">http://www.tornadoweb.org/en/stable/</a>], 主要处理index/init/run/stop/open log各个请求动作;
+<img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png" alt="structure"></p>
+
+<p><strong>web_tornado.py</strong>是主函数, 由<a href="tornado">http://www.tornadoweb.org/en/stable/</a>这个库发力, 主要处理index/init/run/stop/open log各个请求动作;
 <strong>GLOBAL.py</strong>保存全局变量;
 <strong>init_by_ping.py</strong>用抓取ping返回值的方式判断设备是否存活;
 <strong>run_test.py</strong>采用多线程的方式处理发送命令/抓取log/分析log的操作;

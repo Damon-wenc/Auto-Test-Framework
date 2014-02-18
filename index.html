@@ -54,6 +54,17 @@
 <a name="%E8%AE%BE%E8%AE%A1%E5%AE%9A%E4%BD%8D" class="anchor" href="#%E8%AE%BE%E8%AE%A1%E5%AE%9A%E4%BD%8D"><span class="octicon octicon-link"></span></a>设计定位</h3>
 
 <p>这不是是一个完整的自动化测试系统, 仅仅是一个上层的测试框架, 类似于一个控制中心, 下层的系统内的各种测试并不包含在内, 但是可以通过ssh来发送'start'命令, 通过收集'日志'接口来获取状态log, 等等来完成整套测试. 同时HTML(web)能清晰直白地显示出测试结果, 方便测试员观察.</p>
+
+<h3>
+<a name="%E6%A1%86%E6%9E%B6" class="anchor" href="#%E6%A1%86%E6%9E%B6"><span class="octicon octicon-link"></span></a>框架</h3>
+
+<p>整套代码不到600行, 大体框架如下图
+<img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png" alt="structure"><strong>web_tornado.py</strong>是主函数, 由tornado这个库发力.[<a href="http://www.tornadoweb.org/en/stable/">http://www.tornadoweb.org/en/stable/</a>], 主要处理index/init/run/stop/open log各个请求动作;
+<strong>GLOBAL.py</strong>保存全局变量;
+<strong>init_by_ping.py</strong>用抓取ping返回值的方式判断设备是否存活;
+<strong>run_test.py</strong>采用多线程的方式处理发送命令/抓取log/分析log的操作;
+<strong>ssh.py</strong>藉由plink连接各设备, 有重连机制;
+<strong>analysis.py</strong>用抓取错误关键字的方式分析log;</p>
       </section>
     </div>
 

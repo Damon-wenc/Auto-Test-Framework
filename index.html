@@ -61,12 +61,20 @@
 <p>整套代码不到600行, 大体框架如下图
 <img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png" alt="structure"></p>
 
-<p><strong>web_tornado.py</strong>是主函数, 由<a href="tornado">http://www.tornadoweb.org/en/stable/</a>这个库发力, 主要处理index/init/run/stop/open log各个请求动作;
-<strong>GLOBAL.py</strong>保存全局变量;
-<strong>init_by_ping.py</strong>用抓取ping返回值的方式判断设备是否存活;
-<strong>run_test.py</strong>采用多线程的方式处理发送命令/抓取log/分析log的操作;
-<strong>ssh.py</strong>藉由plink连接各设备, 有重连机制;
-<strong>analysis.py</strong>用抓取错误关键字的方式分析log;</p>
+<ul>
+<li>
+<strong>web_tornado.py</strong>是主函数, 由<a href="http://www.tornadoweb.org/en/stable/">tornado</a>这个库发力, 主要处理index/init/run/stop/open log各个请求动作</li>
+<li>
+<strong>GLOBAL.py</strong>保存全局变量</li>
+<li>
+<strong>init_by_ping.py</strong>用抓取ping返回值的方式判断设备是否存活</li>
+<li>
+<strong>run_test.py</strong>采用多线程的方式处理发送命令/抓取log/分析log的操作</li>
+<li>
+<strong>ssh.py</strong>藉由plink连接各设备, 有重连机制</li>
+<li>
+<strong>analysis.py</strong>用抓取错误关键字的方式分析log</li>
+</ul>
       </section>
     </div>
 

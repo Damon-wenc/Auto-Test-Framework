@@ -26,6 +26,18 @@ An automatic &amp; light test framework based on Python &amp; HTML; python do th
 * **run_test.py**采用多线程的方式处理发送命令/抓取log/分析log的操作
 * **ssh.py**藉由plink连接各设备, 有重连机制
 * **analysis.py**用抓取错误关键字的方式分析log
-
-### 
-### 
+### 界面示例
+* 首先是运行web_tornado.py后的根页面
+![index](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/index.jpg)
+这里展示了对100台设备进行管理.
+* 第二步, 敲击init键
+![init](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/init.jpg)
+例如这是前80台设备在线, 以绿色标识; 灰色设备是不在线.
+* 第三步, 敲击run键
+![run](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/run.jpg)
+此时程序已开始运行, 并且出现问题的设备会用红色标识. 点击各表格, 会跳转到相应的log轮次. 例如绿色的会跳转到96轮log, 红色则跳转到出问题的那一轮. 红色的设备将不继续进程后续测试. 
+* 第四步, 当所有测试完后需点击stop键
+### 详细设计
+请点击左上角自行阅读源代码:D
+### 最后说明
+这只是一个上层的清晰明了的控制框架, 下层怎么实现取决于你, 最终只要能抓取到测试的log则算一个完整的来回. 这只是一个对于大规模测试的抱砖引玉的idea, 具体怎么实施, 那将由你来决定!

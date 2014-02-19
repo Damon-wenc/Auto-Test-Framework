@@ -37,6 +37,7 @@ An automatic &amp; light test framework based on Python &amp; HTML; python do th
 ![run](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/run.jpg)
 此时程序已开始运行, 并且出现问题的设备会用红色标识. 点击各表格, 会跳转到相应的log轮次. 例如绿色的会跳转到96轮log, 红色则跳转到出问题的那一轮. 红色的设备将不继续进程后续测试. 
 * 第四步, 当所有测试完后需点击stop键
+
 ### 详细设计
 请点击左上角自行阅读源代码:D
 ### 最后说明

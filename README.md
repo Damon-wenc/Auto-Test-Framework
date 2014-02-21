@@ -2,17 +2,20 @@
 
 ## English version
 
+### Keywords
+An automatic &amp; light mass-clients test framework based on Python &amp; HTML; python do the logic, and web(HTML) display it.
+
 ### description
-An automatic &amp; light test framework based on Python &amp; HTML; python do the logic, and web(HTML) display it.
+This is not a complete auto-test system, it's just a upper layer test framework, sort of a 'Control Center', allow you to master a mass of devices; whatever tests you are about to run on your device is not included, but this framework will help you senting 'start/stop' commands via SSH, and collecting test logs to monitor test progress, and eventually the web will show the test results to you in a clear way.
 
 ### 
-### 
+
 ### 
 
 ## 中文说明
 
 ### 一句话综述
-这是一个由Python&HTML构建的轻量级自动化测试框架; Python作逻辑层, HTML来显示.
+这是一个由Python&HTML构建的轻量级大规模自动化测试框架; Python作逻辑层, HTML来显示.
 
 ### 设计定位
 这不是是一个完整的自动化测试系统, 仅仅是一个上层的测试框架, 类似于一个控制中心, 下层的系统内的各种测试并不包含在内, 但是可以通过ssh来发送'start'命令, 通过收集'日志'接口来获取状态log, 等等来完成整套测试. 同时HTML(web)能清晰直白地显示出测试结果, 方便测试员观察.

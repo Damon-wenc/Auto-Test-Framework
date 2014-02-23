@@ -1,36 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Auto-test-framework : An automatic &amp; light test system based on html &amp; python; python do the logic, and web(html) display it." />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Auto-test-framework by Damon-wenc</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Auto-test-framework</title>
   </head>
-
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Damon-wenc/Auto-Test-Framework">View on GitHub</a>
+      <header>
+        <h1>Auto-test-framework</h1>
+        <p>An automatic &amp; light test system based on html &amp; python; python do the logic, and web(html) display it.</p>
+      </header>
 
-          <h1 id="project_title">Auto-test-framework</h1>
-          <h2 id="project_tagline">An automatic &amp; light test system based on html &amp; python; python do the logic, and web(html) display it.</h2>
+      <div id="banner">
+        <span id="logo"></span>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Damon-wenc/Auto-Test-Framework/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Damon-wenc/Auto-Test-Framework/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+        <a href="https://github.com/Damon-wenc/Auto-Test-Framework" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/Damon-wenc/Auto-Test-Framework/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/Damon-wenc/Auto-Test-Framework/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
         <h1>
 <a name="auto-test-framework" class="anchor" href="#auto-test-framework"><span class="octicon octicon-link"></span></a>Auto-Test-Framework</h1>
 
@@ -46,6 +54,50 @@
 <a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>description</h3>
 
 <p>This is not a complete auto-test system, it's just a upper layer test framework, sort of a 'Control Center', allow you to master a mass of devices; whatever tests you are about to run on your device is not included, but this framework will help you senting 'start/stop' commands via SSH, and collecting test logs to monitor test progress, and eventually the web will show the test results to you in a clear way.</p>
+
+<h3>
+<a name="structure" class="anchor" href="#structure"><span class="octicon octicon-link"></span></a>Structure</h3>
+
+<p>The code is less than 600 lines, the structure of the framework is like thils:
+<img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png" alt="structure"></p>
+
+<ul>
+<li>
+<strong>web_tornado.py</strong> is the base, it's powered by<a href="http://www.tornadoweb.org/en/stable/">tornado</a>, a powerful library of Python; it process requests like 'GET index/init/run/stop/open_log';</li>
+<li>
+<strong>GLOBAL.py</strong> saves global variables;</li>
+<li>
+<strong>init_by_ping.py</strong> detecting whether your devices are online by fetch the return value of 'ping' cmd;</li>
+<li>
+<strong>run_test.py</strong> send commands/retrieve log/analysis log with multi-threading;</li>
+<li>
+<strong>ssh.py</strong> connecting to your devices with 'plink' tool, with a mechanism of re-connect;</li>
+<li>
+<strong>analysis.py</strong> analysis retrieved log by matching 'error keywords'</li>
+</ul><h3>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h3>
+
+<ol>
+<li>root page: this is the page shown up after you run web_tornado.py
+<img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/index.jpg" alt="index">
+You can see we could monitor 100 or more devices here.</li>
+<li>step 2, click the 'init' button
+<img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/init.jpg" alt="init">
+Now there are 80 devices online, with color green, and the other 20 devices are offline, with color grey</li>
+<li>step 3, click the 'run' button
+<img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/run.jpg" alt="run">
+Now the program begins to run, error occurred on any devices will turn the color of the devices from green to red, and logs from those particular devices will not longer be updated. So if you click the table url, if the device is OK, as green, the latest folder will shown up automatically; while if you click the wrong ones, as red, the log of the failed round will shown up.</li>
+<li>step 4, if you want to finish the test, click the 'stop' button.</li>
+</ol><h3>
+<a name="details" class="anchor" href="#details"><span class="octicon octicon-link"></span></a>Details</h3>
+
+<p>Please watch the code by urself :D</p>
+
+<h3>
+<a name="last-words" class="anchor" href="#last-words"><span class="octicon octicon-link"></span></a>Last words</h3>
+
+<p>This is just a light&amp;clear upper level control framework, what you are intending to do on your device is not included,  'send' -&gt; 'run' -&gt; 'retrieve log' -&gt; 'analysis log' is a complete loop.
+This is a idea about 'auto-test on mass of devices', how you are about to implement it or what, that is for you to decide. XD</p>
 
 <h2>
 <a name="%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E" class="anchor" href="#%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E"><span class="octicon octicon-link"></span></a>中文说明</h2>
@@ -103,17 +155,12 @@
 
 <p>这只是一个上层的清晰明了的控制框架, 下层怎么实现取决于你, 最终只要能抓取到测试的log则算一个完整的来回. 这只是一个对于大规模测试的抱砖引玉的idea, 具体怎么实施, 那将由你来决定!</p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Auto-test-framework maintained by <a href="https://github.com/Damon-wenc">Damon-wenc</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/Damon-wenc">Damon-wenc</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
-
   </body>
 </html>

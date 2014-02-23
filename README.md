@@ -21,6 +21,13 @@ The code is less than 600 lines, the structure of the framework is like thils:
 
 ### 
 
+### Details
+Please watch the code by urself :D
+
+### Last words
+This is just a light&clear upper level control framework, what you are intending to do on your device is not included,  'send' -> 'run' -> 'retrieve log' -> 'analysis log' is a complete loop.
+This is a idea about 'auto-test on mass of devices', how you are about to implement it or what, that is for you to decide. XD
+
 ## 中文说明
 
 ### 一句话综述

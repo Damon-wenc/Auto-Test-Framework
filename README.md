@@ -8,7 +8,16 @@ An automatic &amp; light mass-clients test framework based on Python &amp; HTML;
 ### description
 This is not a complete auto-test system, it's just a upper layer test framework, sort of a 'Control Center', allow you to master a mass of devices; whatever tests you are about to run on your device is not included, but this framework will help you senting 'start/stop' commands via SSH, and collecting test logs to monitor test progress, and eventually the web will show the test results to you in a clear way.
 
-### 
+### Structure
+The code is less than 600 lines, the structure of the framework is like thils:
+![structure](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png)
+
+* **web_tornado.py** is the base, it's powered by[tornado](http://www.tornadoweb.org/en/stable/), a powerful library of Python; it process requests like 'GET index/init/run/stop/open_log';
+* **GLOBAL.py** saves global variables;
+* **init_by_ping.py** detecting whether your devices are online by fetch the return value of 'ping' cmd;
+* **run_test.py** send commands/retrieve log/analysis log with multi-threading;
+* **ssh.py** connecting to your devices with 'plink' tool, with a mechanism of re-connect;
+* **analysis.py** analysis retrieved log by matching 'error keywords'
 
 ### 
 

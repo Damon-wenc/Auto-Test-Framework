@@ -12,7 +12,7 @@ This is not a complete auto-test system, it's just a upper layer test framework,
 The code is less than 600 lines, the structure of the framework is like thils:
 ![structure](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png)
 
-* **web_tornado.py** is the base, it's powered by[tornado](http://www.tornadoweb.org/en/stable/), a powerful library of Python; it process requests like 'GET index/init/run/stop/open_log';
+* **web_tornado.py** is the base, it's powered by [tornado](http://www.tornadoweb.org/en/stable/), a powerful library of Python; it process requests like 'GET index/init/run/stop/open_log';
 * **GLOBAL.py** saves global variables;
 * **init_by_ping.py** detecting whether your devices are online by fetch the return value of 'ping' cmd;
 * **run_test.py** send commands/retrieve log/analysis log with multi-threading;
@@ -33,6 +33,9 @@ Now the program begins to run, error occurred on any devices will turn the color
 
 ### Details
 Please watch the code by urself :D
+
+### Implementation
+The code is tested with Python version 2.7 on Windows. All you need to install is tornado library, please follow the [official guide](http://www.tornadoweb.org/en/stable/#installation). And if your OS is *nix, you may rewrite the ssh.py module with more properly libraries, like paramiko.
 
 ### Last words
 This is just a light&clear upper level control framework, what you are intending to do on your device is not included,  'send' -> 'run' -> 'retrieve log' -> 'analysis log' is a complete loop.
@@ -71,6 +74,9 @@ This is a idea about 'auto-test on mass of devices', how you are about to implem
 
 ### 详细设计
 请点击左上角自行阅读源代码:D
+
+### 部署
+代码已在Windows平台上的Python 2.7版本下测试通过. 你需要的只是安装好tornado库, 可以参照[官方文档](http://www.tornadoweb.org/en/stable/#installation), 其中一些库你可能需要找Windows的编译版本. 若你是要在*nix平台上运行此代码, 你需要重写ssh.py模块, 利用更标准的库, 例如paramiko等.
 
 ### 最后说明
 这只是一个上层的清晰明了的控制框架, 下层怎么实现取决于你, 最终只要能抓取到测试的log则算一个完整的来回. 这只是一个对于大规模测试的抱砖引玉的idea, 具体怎么实施, 那将由你来决定!

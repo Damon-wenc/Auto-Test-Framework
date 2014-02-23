@@ -19,7 +19,17 @@ The code is less than 600 lines, the structure of the framework is like thils:
 * **ssh.py** connecting to your devices with 'plink' tool, with a mechanism of re-connect;
 * **analysis.py** analysis retrieved log by matching 'error keywords'
 
-### 
+### Examples
+1. root page: this is the page shown up after you run web_tornado.py
+![index](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/index.jpg)
+You can see we could monitor 100 or more devices here.
+2. step 2, click the 'init' button
+![init](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/init.jpg)
+Now there are 80 devices online, with color green, and the other 20 devices are offline, with color grey
+3. step 3, click the 'run' button
+![run](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/run.jpg)
+Now the program begins to run, error occurred on any devices will turn the color of the devices from green to red, and logs from those particular devices will not longer be updated. So if you click the table url, if the device is OK, as green, the latest folder will shown up automatically; while if you click the wrong ones, as red, the log of the failed round will shown up.
+4. step 4, if you want to finish the test, click the 'stop' button.
 
 ### Details
 Please watch the code by urself :D

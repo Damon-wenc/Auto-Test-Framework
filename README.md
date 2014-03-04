@@ -8,7 +8,7 @@ An automatic &amp; light mass-clients test framework based on Python &amp; HTML;
 ### description
 This is not a complete auto-test system, it's just a upper layer test framework, sort of a 'Control Center', allow you to master a mass of devices; whatever tests you are about to run on your device is not included, but this framework will help you senting 'start/stop' commands via SSH, and collecting test logs to monitor test progress, and eventually the web will show the test results to you in a clear way.
 
-### Structure
+### Layout
 The code is less than 600 lines, the structure of the framework is like thils:
 ![structure](https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png)
 

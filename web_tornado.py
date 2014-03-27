@@ -46,7 +46,7 @@ class MainHandler(tornado.web.RequestHandler):
         global color_str
         color_str = OrderedDict()
         get_color_str()
-        self.render("index.html", flag = " ",
+        self.render("index.html", flag = " ", disabled_action = "start",
                     color = color_str, url = GLOBAL.log_dir,
                     tstatus = "not running", tround = "not yet", ttime = "not yet", tlast = "not yet"
                     )
@@ -61,9 +61,9 @@ class InitHandler(tornado.web.RequestHandler):
         test_prepare()
         init_by_ping.run()
         get_color_str()
-        self.render("index.html", flag = " ",
+        self.render("index.html", flag = " ", disabled_action = "",
                     color = color_str, url = GLOBAL.log_dir,
-                    tstatus = "initialization", tround = "not yet", ttime = "not yet", tlast = "not yet"
+                    tstatus = "initialized", tround = "not yet", ttime = "not yet", tlast = "not yet"
                     )
 
 class StartHandler(tornado.web.RequestHandler):
@@ -80,7 +80,7 @@ class StartHandler(tornado.web.RequestHandler):
         os.makedirs("log/round%d" %GLOBAL.test_round)
         run_test.start()
         get_color_str()
-        self.render("index.html", flag = web_refresh,
+        self.render("index.html", flag = web_refresh, disabled_action = "start",
                     color = color_str, url = GLOBAL.log_dir,
                     tstatus = "running", tround = GLOBAL.test_round, ttime = time.strftime('%H:%M %m-%d-%Y', time.localtime(start_time)), tlast = "%.1f hours" %((time.time()-start_time)/60/60)
                     )
@@ -93,7 +93,7 @@ class StopHandler(tornado.web.RequestHandler):
         run_test.stop()
         color_str = OrderedDict()
         get_color_str()
-        self.render("index.html", flag = " ",
+        self.render("index.html", flag = " ", disabled_action = "start",
                     color = color_str, url = GLOBAL.log_dir,
                     tstatus = "stopped", tround = GLOBAL.test_round, ttime = time.strftime('%H:%M %m-%d-%Y', time.localtime(start_time)), tlast = "%.1f hours" %((time.time()-start_time)/60/60)
                     )

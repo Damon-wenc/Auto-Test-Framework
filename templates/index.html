@@ -31,7 +31,11 @@ h3 {margin-bottom:0;font-size:18px;}
 <input type="submit" style="width:100%;height:30px;" value="INIT">
 </form>
 <form method="get" action="/run">
+{% if disabled_action == "start" %}
+<input type="submit" style="width:100%;height:30px;" value="START"  disabled="disabled">
+{% else %}
 <input type="submit" style="width:100%;height:30px;" value="START">
+{% end %}
 </form>
 <form method="get" action="/stop">
 <input type="submit" style="width:100%;height:30px;" value="STOP">

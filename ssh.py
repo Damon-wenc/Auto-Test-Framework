@@ -17,7 +17,7 @@ import time
 
 def run(enc_index, cmd):
     if 'start' == cmd:
-        retry_times = 3
+        retry_times = 1
     else:
         retry_times = 20
     count = 0

@@ -33,7 +33,11 @@ for i in range (start_ip, end_ip):
 ipaddr = '192.168.2.'
 
 #
-interval = 60 * 30 #30 minutes
+interval = 60 * 3 #3 minutes
 
 #
 test_round = 1
+
+#for auto show error info function
+err_row = 0
+err_msg = ""

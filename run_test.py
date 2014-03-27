@@ -41,7 +41,9 @@ class check_log_status(threading.Thread):
         threading.Thread.__init__(self)
         self.index = index
     def run(self):
-        ret = analysis.filecheck(self.index)
+        filename = ''
+        filename = './log/round' + str(GLOBAL.test_round) + '/' + str(self.index) + '_heat'
+        ret = analysis.filecheck(filename)
         if 1 == ret:
             GLOBAL.enc_status[self.index] = 1
         else:

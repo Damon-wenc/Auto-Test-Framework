@@ -13,14 +13,14 @@ import analysis
 import GLOBAL
 
 def run():
-    interval = 60# * 3
+    interval = 60   #60 seconds
 
     checked_round = 0
     checked_folders = []
 
     print '''
 /********************************************************************************
- *********************HEAT error log auto-detect program*************************
+ *********************ATF error log auto-detect program**************************
  *********************Please watch out for the upcoming prints*******************
  ********************************************************************************/
  '''

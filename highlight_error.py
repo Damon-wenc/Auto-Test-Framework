@@ -18,23 +18,21 @@ def run():
     checked_round = 0
     checked_folders = []
 
-    print '''/********************************************************************************
+    print '''
+/********************************************************************************
  *********************HEAT error log auto-detect program*************************
  *********************Please watch out for the upcoming prints*******************
- ********************************************************************************/'''
+ ********************************************************************************/
+ '''
 
     while True:
         checking_round = 0
         log_path = os.path.join(os.getcwd(), 'log')
         for i in os.listdir(log_path):
             if i.find('round') == 0:
-                #print i
-                #print checking_round, checked_round
                 checking_round += 1
                 checked = False
-                #if checking_round <= checked_round: #log folders have already been checked
-                    #continue
-                #print 'new folder detected'
+
                 for folder in checked_folders:
                     if i == folder:
                         checked = True
@@ -51,10 +49,9 @@ def run():
                         print 'error keyword: \t%s\n\n' %GLOBAL.err_msg
                 checked_round += 1
                 checked_folders.append(i)
-        print '--------------------'
-        time.sleep(10)
+        #print '.'
+        time.sleep(interval)
 
-        #break
         
 
 

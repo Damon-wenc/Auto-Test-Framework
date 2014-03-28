@@ -51,7 +51,7 @@ def filecheck(filename):
 	if os.path.exists(filename) == False:
 		return -1
 	if os.path.getsize(filename) == 0:
-		return 0
+		return -1
 	f = open(filename, 'r')
 	i = 1
 	while True:
@@ -61,7 +61,6 @@ def filecheck(filename):
 			break
 		for keyword in keyword_arr:
 			if line.find(keyword) != -1:
-				print i, keyword
 				GLOBAL.err_row = i
 				GLOBAL.err_msg = keyword
 				f.close()

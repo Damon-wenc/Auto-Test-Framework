@@ -9,24 +9,49 @@ Automatically show error info among a various of log files
 
 import os
 import time
+import analysis
+import GLOBAL
 
 def run():
-    checked_round = 0
     interval = 60# * 3
+
+    checked_round = 0
+    checked_folders = []
+
+    print '''/********************************************************************************
+ *********************HEAT error log auto-detect program*************************
+ *********************Please watch out for the upcoming prints*******************
+ ********************************************************************************/'''
 
     while True:
         checking_round = 0
         log_path = os.path.join(os.getcwd(), 'log')
         for i in os.listdir(log_path):
             if i.find('round') == 0:
+                #print i
                 #print checking_round, checked_round
                 checking_round += 1
-                if checking_round <= checked_round: #log folders have already been checked
+                checked = False
+                #if checking_round <= checked_round: #log folders have already been checked
+                    #continue
+                #print 'new folder detected'
+                for folder in checked_folders:
+                    if i == folder:
+                        checked = True
+                        break
+                if checked:
                     continue
-                #print checking_round, checked_round
+                #print '---', i
                 for j in os.listdir(os.path.join(log_path, i)):
-                    print j
+                    k = analysis.filecheck(os.path.join(log_path, i, j))
+                    if k == 0:
+                        print '\n\n**********error detected**********'
+                        print 'error log url: \t%s' %os.path.join(i, j)
+                        print 'error row NO.: \tline %d' %GLOBAL.err_row
+                        print 'error keyword: \t%s\n\n' %GLOBAL.err_msg
                 checked_round += 1
+                checked_folders.append(i)
+        print '--------------------'
         time.sleep(10)
 
         #break

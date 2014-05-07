@@ -21,7 +21,7 @@ class analysis_log(threading.Thread):
         k = analysis.filecheck(self.name)
         if k == 0:
             print '\n\n**********error detected**********'
-            print 'error log url: \t%s' %self.name#os.path.join(i, j)
+            print 'error log url: \t%s' %self.name
             print 'error row NO.: \tline %d' %GLOBAL.err_row
             print 'error keyword: \t%s\n\n' %GLOBAL.err_msg
 
@@ -47,7 +47,7 @@ def run():
         n_current_round_folder = len(dir_list)
         
         # if the count of folders decreased, it should be lots of 'old rounds' has been packed
-        # so empty the checked_folders list
+        # then empty the checked_folders list
         if n_current_round_folder < n_last_round_folder:
             print checked_folders
             checked_folders = []
@@ -63,27 +63,20 @@ def run():
                         break
                 if checked:
                     continue
-                #print '---', i
+                
                 thread_pool = []
                 for j in os.listdir(os.path.join(log_path, i)):
                     thread_pool.append(analysis_log(os.path.join(log_path, i, j)))
                 for x in thread_pool:
                     x.start()
-                    #print len(thread_pool)
                 for t in thread_pool:
                     t.join()
-                    #k = analysis.filecheck(os.path.join(log_path, i, j))
-                    #if k == 0:
-                        #print '\n\n**********error detected**********'
-                        #print 'error log url: \t%s' %os.path.join(i, j)
-                        #print 'error row NO.: \tline %d' %GLOBAL.err_row
-                        #print 'error keyword: \t%s\n\n' %GLOBAL.err_msg
-                print "folder %s checked" %i
+
+                #print "folder %s checked" %i
                 checked_folders.append(i)
-        #print '.'
+        
         n_last_round_folder = n_current_round_folder
-        time.sleep(10)
-        #time.sleep(interval)
+        time.sleep(interval)
 
         
 

@@ -33,7 +33,7 @@ for i in range (start_ip, end_ip):
 ipaddr = '192.168.2.'
 
 #
-interval = 60 * 3 #3 minutes
+interval = 60 * 3 #3 minutes, the interval SHOULD NOT BE LESS THAN 3 MINITES!!!
 
 #
 test_round = 1

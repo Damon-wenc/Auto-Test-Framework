@@ -41,7 +41,9 @@ keyword_arr = ['Called Memory smash',
                'unpresent',
                'No route to host',
                'get object_id',
-               'rate changed  to'
+               'rate changed  to',
+               'err:there is no disk',
+               'mgmt0: Link is down'
                ]
 
 

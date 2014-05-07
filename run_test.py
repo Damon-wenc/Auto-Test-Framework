@@ -86,7 +86,7 @@ def set_log_dir():
 def start():
     if 1 == GLOBAL.test_round:
         send_cmd('start')
-        time.sleep(60)
+        time.sleep(90)
     set_log_dir()
     get_log()
     check_log()

@@ -24,9 +24,14 @@ def run(enc_index, cmd):
     
     connect = subp.Popen(["plink.exe", '-ssh', 'root@%s%s' %(GLOBAL.ipaddr, enc_index), '-pw', 'root'],\
                          stdin=subp.PIPE)
-    connect.stdin.write("y\n")
+    if 'start' == cmd:
+        time.sleep(10)
+        connect.stdin.write("y\n")
+    time.sleep(3)
     connect.stdin.write("login -n admin -p admin\n")
+    time.sleep(3)
     connect.stdin.write("hwtest -t %s\n" %cmd)
+    time.sleep(3)
     connect.stdin.write("quit\n")
     time.sleep(30)
     #connect.wait()

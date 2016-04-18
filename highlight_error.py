@@ -28,8 +28,8 @@ class analysis_log(threading.Thread):
 def print_start():
     print '''
 /************************************************************************
- *****************HEAT error log auto-detect program*********************
- *****************Please watch out for the upcoming prints***************
+ **************Error log auto-detect program is running******************
+ **************Please watch out for the upcoming results*****************
  ************************************************************************/
  '''
     
@@ -77,8 +77,6 @@ def run():
         
         n_last_round_folder = n_current_round_folder
         time.sleep(interval)
-
-        
 
 
 if __name__ == '__main__':

@@ -20,7 +20,7 @@ def run(enc_index, cmd):
         retry_times = 1
     else:
         retry_times = 20
-    count = 0
+    round = 0
     
     connect = subp.Popen(["plink.exe", '-ssh', 'root@%s%s' %(GLOBAL.ipaddr, enc_index), '-pw', 'root'],\
                          stdin=subp.PIPE)
@@ -34,11 +34,11 @@ def run(enc_index, cmd):
     time.sleep(3)
     connect.stdin.write("quit\n")
     time.sleep(30)
-    #connect.wait()
+
     while True:
         if 0 == connect.poll():
             break
-        elif retry_times == count:
+        elif retry_times == round:
             break
         else:
             connect.kill()
@@ -48,10 +48,8 @@ def run(enc_index, cmd):
             connect.stdin.write("login -n admin -p admin\n")
             connect.stdin.write("hwtest -t %s\n" %cmd)
             connect.stdin.write("quit\n")
-            count += 1
+            round += 1
             time.sleep(60)
-            #connect.wait()
-            
 
 
 if __name__ == '__main__':

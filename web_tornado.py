@@ -12,7 +12,7 @@ I only build a simple version web with 4 buttons: init, start, stop, open_log.
     start:    send start test cmd to device, and retrieve & analysis log every 30 minutes(invoked by web auto refresh), give warning if any error occurs;
     stop:     send stop test cmd to device, stop the test loop;
     open_log: open log dir for manual analysis.
-Maybe some scripts works only on Windows, I haven't tested them on some other OS yet. 
+Some scripts works only on Windows, I haven't tested them on some other OS yet. 
 
 @author: Damon
 ''' 
@@ -30,17 +30,46 @@ import init_by_ping
 import webbrowser
 import run_test
 from collections import OrderedDict
-
-
 from tornado.options import define, options
 
 define("port", default=8888, help="run on the given port", type=int)
 
 color_str = OrderedDict()
 flag_run_test = False
-
 start_time = 0.0
 
+
+'''
+set the color of every table cell according to its value 
+'''
+def get_color_str():
+    global color_str
+    for name,address in GLOBAL.enc_status.items():
+        if address == -1:
+            color_str[name] = 'bgcolor="red"'
+        elif address == 0:
+            color_str[name] = 'bgcolor="grey"'
+        else:
+            color_str[name] = 'bgcolor="limegreen"'
+'''
+move all old folders which start with "round" to a packed folder named "timebefore*"
+'''
+def test_prepare():
+    os.chdir('./log')
+    dirs = os.listdir('.')
+    pack_dir = 'timebefore%s' %time.strftime('%H_%M_%m_%d_%Y', time.localtime(time.time()))
+    
+    for folder in dirs:
+        if 0 != folder.find('timebefore'):
+            if False == os.path.exists(pack_dir):
+                os.mkdir(pack_dir)
+            shutil.move(folder, pack_dir)
+    
+    os.chdir('..')
+
+'''
+five requesthandler
+'''
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         global color_str
@@ -97,29 +126,6 @@ class StopHandler(tornado.web.RequestHandler):
                     color = color_str, url = GLOBAL.log_dir,
                     tstatus = "stopped", tround = GLOBAL.test_round, ttime = time.strftime('%H:%M %m-%d-%Y', time.localtime(start_time)), tlast = "%.1f hours" %((time.time()-start_time)/60/60)
                     )
-
-def get_color_str():
-    global color_str
-    for name,address in GLOBAL.enc_status.items():
-        if address == -1:
-            color_str[name] = 'bgcolor="red"'
-        elif address == 0:
-            color_str[name] = 'bgcolor="grey"'
-        else:
-            color_str[name] = 'bgcolor="limegreen"'
-
-def test_prepare():
-    os.chdir('./log')
-    dirs = os.listdir('.')
-    pack_dir = 'timebefore%s' %time.strftime('%H_%M_%m_%d_%Y', time.localtime(time.time()))
-    
-    for folder in dirs:
-        if 0 != folder.find('timebefore'):
-            if False == os.path.exists(pack_dir):
-                os.mkdir(pack_dir)
-            shutil.move(folder, pack_dir)
-    
-    os.chdir('..')
 
 class OpenlogHandler(tornado.web.RequestHandler):
     def get(self, log_round):

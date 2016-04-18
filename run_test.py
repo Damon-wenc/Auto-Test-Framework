@@ -16,6 +16,9 @@ import urllib
 import ssh
 import time
 
+'''
+function retrieve_log can download log from "http://ip_addr:8081/upload/log_heat" to "./log/round*/round_heat"
+'''
 class retrieve_log(threading.Thread):
     def __init__(self, index, name):
         threading.Thread.__init__(self)
@@ -30,12 +33,16 @@ def get_log():
     for name, address in GLOBAL.enc_status.items():
         if 1 == address:
             thread_pool.append(retrieve_log(name, 'heat'))
+            
     for t in thread_pool:
         t.start()
-        #time.sleep(5)
+        
     for t in thread_pool:
         t.join()
 
+'''
+check device status by analysis the retrieved log
+'''
 class check_log_status(threading.Thread):
     def __init__(self, index):
         threading.Thread.__init__(self)
@@ -57,9 +64,10 @@ def check_log():
     for t in thread_pool:
         t.start()
         time.sleep(1)
+
     for t in thread_pool:
         t.join()
-                    
+
 def send_cmd(cmd):
     thread_pool = []
     for name, address in GLOBAL.enc_status.items():
@@ -75,25 +83,26 @@ def send_cmd(cmd):
     for t in thread_pool:
         t.start()
         time.sleep(1)
+
     for t in thread_pool:
         t.join()
 
 def set_log_dir():
     for name, address in GLOBAL.enc_status.items():
-        if 1 == address:
+        if address == 1:
             GLOBAL.log_dir[name] = GLOBAL.test_round
 
 def start():
-    if 1 == GLOBAL.test_round:
+    if GLOBAL.test_round == 1:
         send_cmd('start')
         time.sleep(90)
     set_log_dir()
     get_log()
     check_log()
 
-    
 def stop():
     send_cmd('stop')
+
 
 if __name__ == '__main__':
     GLOBAL.enc_status = {19 : 1}

@@ -1,42 +1,51 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Auto-test-framework by Damon-wenc</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">Auto-test-framework</h1>
-      <h2 class="project-tagline">An automatic &amp; light test system based on html &amp; python; python do the logic, and web(html) display it.</h2>
-      <a href="https://github.com/Damon-wenc/Auto-Test-Framework" class="btn">View on GitHub</a>
-      <a href="https://github.com/Damon-wenc/Auto-Test-Framework/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/Damon-wenc/Auto-Test-Framework/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <div class="wrapper">
+      <header>
+        <h1>Auto-test-framework</h1>
+        <p>An automatic &amp; light test system based on html &amp; python; python do the logic, and web(html) display it.</p>
 
-    <section class="main-content">
-      <h1>
-<a id="auto-test-framework" class="anchor" href="#auto-test-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Auto-Test-Framework</h1>
+        <p class="view"><a href="https://github.com/Damon-wenc/Auto-Test-Framework">View the Project on GitHub <small>Damon-wenc/Auto-Test-Framework</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Damon-wenc/Auto-Test-Framework/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Damon-wenc/Auto-Test-Framework/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Damon-wenc/Auto-Test-Framework">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="auto-test-framework" class="anchor" href="#auto-test-framework" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Auto-Test-Framework</h1>
 
 <h2>
-<a id="english-version" class="anchor" href="#english-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>English version</h2>
+<a id="english-version" class="anchor" href="#english-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>English version</h2>
 
 <h3>
-<a id="keywords" class="anchor" href="#keywords" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keywords</h3>
+<a id="keywords" class="anchor" href="#keywords" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Keywords</h3>
 
 <p>An automatic &amp; light mass-clients test framework based on Python &amp; HTML; python do the logic, and web(HTML) display it.</p>
 
 <h3>
-<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>description</h3>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>description</h3>
 
 <p>This is not a complete auto-test system, it's just a upper layer test framework, sort of a 'Control Center', allow you to master a mass of devices; whatever tests you are about to run on your device is not included, but this framework will help you senting 'start/stop' commands via SSH, and collecting test logs to monitor test progress, and eventually the web will show the test results to you in a clear way.</p>
 
 <h3>
-<a id="layout" class="anchor" href="#layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layout</h3>
+<a id="layout" class="anchor" href="#layout" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Layout</h3>
 
 <p>The code is less than 600 lines, the structure of the framework is like thils:
 <img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png" alt="structure"></p>
@@ -57,7 +66,7 @@
 </ul>
 
 <h3>
-<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h3>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h3>
 
 <ol>
 <li>root page: this is the page shown up after you run web_tornado.py
@@ -73,36 +82,36 @@ Now the program begins to run, error occurred on any devices will turn the color
 </ol>
 
 <h3>
-<a id="details" class="anchor" href="#details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Details</h3>
+<a id="details" class="anchor" href="#details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Details</h3>
 
 <p>Please watch the code by urself :D</p>
 
 <h3>
-<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation</h3>
+<a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Implementation</h3>
 
 <p>The code is tested with Python version 2.7 on Windows. All you need to install is tornado library, please follow the <a href="http://www.tornadoweb.org/en/stable/#installation">official guide</a>. And if your OS is *nix, you may rewrite the ssh.py module with more properly libraries, like paramiko.</p>
 
 <h3>
-<a id="last-words" class="anchor" href="#last-words" aria-hidden="true"><span class="octicon octicon-link"></span></a>Last words</h3>
+<a id="last-words" class="anchor" href="#last-words" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Last words</h3>
 
 <p>This is just a light&amp;clear upper level control framework, what you are intending to do on your device is not included,  'send' -&gt; 'run' -&gt; 'retrieve log' -&gt; 'analysis log' is a complete loop.
 This is a idea about 'auto-test on mass of devices', how you are about to implement it or what, that is for you to decide. XD</p>
 
 <h2>
-<a id="中文说明" class="anchor" href="#%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E" aria-hidden="true"><span class="octicon octicon-link"></span></a>中文说明</h2>
+<a id="中文说明" class="anchor" href="#%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>中文说明</h2>
 
 <h3>
-<a id="一句话综述" class="anchor" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%BB%BC%E8%BF%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>一句话综述</h3>
+<a id="一句话综述" class="anchor" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%BB%BC%E8%BF%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>一句话综述</h3>
 
 <p>这是一个由Python&amp;HTML构建的轻量级大规模自动化测试框架; Python作逻辑层, HTML来显示.</p>
 
 <h3>
-<a id="设计定位" class="anchor" href="#%E8%AE%BE%E8%AE%A1%E5%AE%9A%E4%BD%8D" aria-hidden="true"><span class="octicon octicon-link"></span></a>设计定位</h3>
+<a id="设计定位" class="anchor" href="#%E8%AE%BE%E8%AE%A1%E5%AE%9A%E4%BD%8D" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>设计定位</h3>
 
 <p>这不是是一个完整的自动化测试系统, 仅仅是一个上层的测试框架, 类似于一个控制中心, 下层的系统内的各种测试并不包含在内, 但是可以通过ssh来发送'start'命令, 通过收集'日志'接口来获取状态log, 等等来完成整套测试. 同时HTML(web)能清晰直白地显示出测试结果, 方便测试员观察.</p>
 
 <h3>
-<a id="框架" class="anchor" href="#%E6%A1%86%E6%9E%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>框架</h3>
+<a id="框架" class="anchor" href="#%E6%A1%86%E6%9E%B6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>框架</h3>
 
 <p>整套代码不到600行, 大体框架如下图
 <img src="https://github.com/Damon-wenc/Auto-Test-Framework/raw/master/examples/structure.png" alt="structure"></p>
@@ -123,7 +132,7 @@ This is a idea about 'auto-test on mass of devices', how you are about to implem
 </ul>
 
 <h3>
-<a id="界面示例" class="anchor" href="#%E7%95%8C%E9%9D%A2%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>界面示例</h3>
+<a id="界面示例" class="anchor" href="#%E7%95%8C%E9%9D%A2%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>界面示例</h3>
 
 <ol>
 <li>首先是运行web_tornado.py后的根页面
@@ -139,28 +148,26 @@ This is a idea about 'auto-test on mass of devices', how you are about to implem
 </ol>
 
 <h3>
-<a id="详细设计" class="anchor" href="#%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1" aria-hidden="true"><span class="octicon octicon-link"></span></a>详细设计</h3>
+<a id="详细设计" class="anchor" href="#%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>详细设计</h3>
 
 <p>请点击左上角自行阅读源代码:D</p>
 
 <h3>
-<a id="部署" class="anchor" href="#%E9%83%A8%E7%BD%B2" aria-hidden="true"><span class="octicon octicon-link"></span></a>部署</h3>
+<a id="部署" class="anchor" href="#%E9%83%A8%E7%BD%B2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>部署</h3>
 
 <p>代码已在Windows平台上的Python 2.7版本下测试通过. 你需要的只是安装好tornado库, 可以参照<a href="http://www.tornadoweb.org/en/stable/#installation">官方文档</a>, 其中一些库你可能需要找Windows的编译版本. 若你是要在*nix平台上运行此代码, 你需要重写ssh.py模块, 利用更标准的库, 例如paramiko等.</p>
 
 <h3>
-<a id="最后说明" class="anchor" href="#%E6%9C%80%E5%90%8E%E8%AF%B4%E6%98%8E" aria-hidden="true"><span class="octicon octicon-link"></span></a>最后说明</h3>
+<a id="最后说明" class="anchor" href="#%E6%9C%80%E5%90%8E%E8%AF%B4%E6%98%8E" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>最后说明</h3>
 
 <p>这只是一个上层的清晰明了的控制框架, 下层怎么实现取决于你, 最终只要能抓取到测试的log则算一个完整的来回. 这只是一个对于大规模测试的抱砖引玉的idea, 具体怎么实施, 那将由你来决定!</p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/Damon-wenc/Auto-Test-Framework">Auto-test-framework</a> is maintained by <a href="https://github.com/Damon-wenc">Damon-wenc</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Damon-wenc">Damon-wenc</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
-
-    </section>
-
-  
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
